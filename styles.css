@@ -1,12 +1,64 @@
-:root{
+:root {
   font-size: 62.5%;
 }
 
 * {
   padding: 0;
   margin: 0;
+  box-sizing: border-box;
 }
 
-h1 {
-  color: red;
+.container {  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.formulario {
+  display: flex;
+  max-width: 1300px;
+}
+
+.form-group {
+  border: 1px solid red;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.form-group .field {
+  flex: 1 1 calc(50% - 2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.trio .field {
+  flex: 1 1 calc(33.33% - 2rem);
+}
+
+.form-group.full-width .field {
+  flex: 1 1 100%;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+@media (max-width: 1024px) {
+  .form-group .field,
+  .form-group.trio .field,
+  .form-group.full-width .field {
+    flex: 1 1 100%;
+  }
 }
