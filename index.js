@@ -25,7 +25,8 @@ const iptQntdEstoque = document.querySelector("#qntdEstoque");
 const iptValorUnitario = document.querySelector("#valorUnitario");
 const iptValorTotal = document.querySelector("#valorTotal");
 const btnAddProduto = document.querySelector("#btnAddProduto");
-
+const btnRemoverProduto = document.querySelector(".btnRemoverProduto");
+const btnConfirmarProduto = document.querySelector("#btn-confirmarProduto");
 
 const produtosArray = [];
 //==== FORNECEDOR =====
@@ -128,12 +129,12 @@ btnAddProduto.addEventListener("click", (event) => {
 
   const cardProduto = document.createElement("div");
   cardProduto.className = "wrp-product";
-  cardProduto.innerHTML = `<button>
+  cardProduto.innerHTML = `<button class="btnRemoverProduto">
               <img src="/assets/trash-xmark-svgrepo-com.png" alt="lixeira" />
             </button>
 
             <div class="wrp-product-img-title">
-              <h3>Produto 1</h3>
+              <h3>Produto ${produtosArray.length + 2}</h3>
               <div class="wrp-product-data-img">
                 <img src="/assets/package-alt-svgrepo-com.png" alt="pacote" />
 
@@ -179,20 +180,37 @@ btnAddProduto.addEventListener("click", (event) => {
                         id="valorTotal"
                         disabled
                       />
+                      <button id="btn-confirmarProduto" >Confirmar</button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>`;
 
-  produtosArray.push({
-    id: Date.now(),
-  });
+  sctProdutos.appendChild(cardProduto);
+});
 
-  produtosArray.forEach((produto) => {
-    sctProdutos.appendChild(cardProduto)
-  })
-  
+//Confirmando Produto
+btnConfirmarProduto.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  if (
+    iptProduto.value.length > 3 &&
+    iptQntdEstoque.value.length != 0 &&
+    iptValorUnitario.value.length != 0 &&
+    iptValorTotal.value.length != 0
+  ) {
+    const produtoASerAdicionado = {
+      id: Date.now(),
+      produto: iptProduto.value,
+      undMedida: iptUndMedida.value,
+      qntdEstoque: parseInt(iptQntdEstoque.value),
+      valorUnitario: parseFloat(iptValorUnitario.value),
+      valorTotal: parseFloat(iptValorTotal.value),
+    };
+    produtosArray.push(produtoASerAdicionado);
+    console.log(produtosArray);
+  }
 });
 
 //==== FORMULÁRIO =====

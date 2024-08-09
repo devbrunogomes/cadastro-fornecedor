@@ -14,7 +14,7 @@
 button,
 input[type="submit"] {
   background-color: #019e0f;
-  color: white;
+  color: rgb(0, 0, 0);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -109,6 +109,7 @@ input {
 .sct-produtos {
   display: flex;
   flex-direction: column;
+  padding: 0.8rem;
   gap: 1rem;
 }
 
@@ -177,6 +178,12 @@ select {
   flex: 1 1 calc(10% - 2rem);
 }
 
+#btn-confirmarProduto {
+  background-color: white;
+  border: 1px solid black;
+  margin-bottom: 0.5rem;
+}
+
 #btnAddProduto {
   height: 3rem;
 }
@@ -227,7 +234,6 @@ select {
 
 @media (max-width: 1024px) {
   .container {
-    
     padding: 0.5rem;
   }
 
@@ -263,6 +269,4 @@ select {
     position: relative;
     transform: translate(0, -8px);
   }
-
-  
 }
