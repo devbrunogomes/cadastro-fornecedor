@@ -18,13 +18,16 @@ const iptTelefone = document.querySelector("#telefone");
 const iptEmail = document.querySelector("#email");
 
 //Variaveis dos elementos do produto
+const sctProdutos = document.querySelector(".sct-produtos");
 const iptProduto = document.querySelector("#produto");
 const iptUndMedida = document.querySelector("#undMedida");
 const iptQntdEstoque = document.querySelector("#qntdEstoque");
 const iptValorUnitario = document.querySelector("#valorUnitario");
 const iptValorTotal = document.querySelector("#valorTotal");
-const cardProduto = document.querySelector("#cardProduto");
-const produtosArray = []
+const btnAddProduto = document.querySelector("#btnAddProduto");
+
+
+const produtosArray = [];
 //==== FORNECEDOR =====
 
 //Fetch data para o CEP
@@ -120,7 +123,77 @@ iptQntdEstoque.addEventListener("input", calcularValorTotal);
 iptValorUnitario.addEventListener("input", calcularValorTotal);
 
 //Adicionando novo Produto
+btnAddProduto.addEventListener("click", (event) => {
+  event.preventDefault();
 
+  const cardProduto = document.createElement("div");
+  cardProduto.className = "wrp-product";
+  cardProduto.innerHTML = `<button>
+              <img src="/assets/trash-xmark-svgrepo-com.png" alt="lixeira" />
+            </button>
+
+            <div class="wrp-product-img-title">
+              <h3>Produto 1</h3>
+              <div class="wrp-product-data-img">
+                <img src="/assets/package-alt-svgrepo-com.png" alt="pacote" />
+
+                <div class="wrp-product-data">
+                  <div class="form-group full-width">
+                    <div class="field">
+                      <label for="produto">Produto</label>
+                      <input type="text" name="produto" id="produto" />
+                    </div>
+                  </div>
+
+                  <div class="form-group quatro">
+                    <div class="field">
+                      <label for="undMedida">UND. Medida</label>
+                      <select name="" id="undMedida">
+                        <option value="kg">Kg</option>
+                        <option value="metros">Metro</option>
+                        <option value="litros">Litros</option>
+                        <option value="und">Unidade</option>
+                      </select>
+                    </div>
+                    <div class="field">
+                      <label for="qntdEstoque">QNTDE. em Estoque</label>
+                      <input
+                        type="number"
+                        name="qntdEstoque"
+                        id="qntdEstoque"
+                      />
+                    </div>
+                    <div class="field">
+                      <label for="valorUnitario">Valor Unitário</label>
+                      <input
+                        type="number"
+                        name="valorUnitario"
+                        id="valorUnitario"
+                      />
+                    </div>
+                    <div class="field">
+                      <label for="valorTotal">Valor Total</label>
+                      <input
+                        type="valorTotal"
+                        name="valorTotal"
+                        id="valorTotal"
+                        disabled
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>`;
+
+  produtosArray.push({
+    id: Date.now(),
+  });
+
+  produtosArray.forEach((produto) => {
+    sctProdutos.appendChild(cardProduto)
+  })
+  
+});
 
 //==== FORMULÁRIO =====
 //Submit do formulário

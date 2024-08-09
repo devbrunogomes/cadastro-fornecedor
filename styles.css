@@ -177,7 +177,7 @@ select {
   flex: 1 1 calc(10% - 2rem);
 }
 
-.sct-produtos button {
+#btnAddProduto {
   height: 3rem;
 }
 
