@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>CADASTRO FORNECEDOR</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -16,19 +16,19 @@
           <div class="fornecedor-dados">
             <div class="form-group">
               <div class="field">
-                <label for="razaoSocial">Razão Social</label>
-                <input type="text" name="razaoSocial" id="razaoSocial" />
+                <label for="razaoSocial">Razão Social*</label>
+                <input type="text" name="razaoSocial" id="razaoSocial" required/>
               </div>
               <div class="field">
-                <label for="cnpj">CNPJ</label>
-                <input type="number" name="cnpj" id="cnpj" />
+                <label for="cnpj">CNPJ*</label>
+                <input type="number" name="cnpj" id="cnpj" required/>
               </div>
             </div>
 
             <div class="form-group">
               <div class="field">
-                <label for="nomeFantasia">Nome Fantasia</label>
-                <input type="text" name="nomeFantasia" id="nomeFantasia" />
+                <label for="nomeFantasia">Nome Fantasia*</label>
+                <input type="text" name="nomeFantasia" id="nomeFantasia" required/>
               </div>
               <div class="field">
                 <label for="inscricaoEstadual">Inscrição Estadual</label>
@@ -42,8 +42,8 @@
 
             <div class="form-group spc-btw">
               <div class="mx-wdt">
-                <label for="cep">CEP</label>
-                <input type="number" name="cep" id="cep" />
+                <label for="cep">CEP*</label>
+                <input type="number" name="cep" id="cep" required/>
               </div>
               <div class="mx-wdt">
                 <label for="inscricaoMunicipal">Inscrição Municipal</label>
@@ -57,49 +57,49 @@
 
             <div class="form-group">
               <div class="field">
-                <label for="endereco">Endereço</label>
-                <input type="text" name="endereco" id="endereco" />
+                <label for="endereco">Endereço*</label>
+                <input type="text" name="endereco" id="endereco" required/>
               </div>
               <div class="field">
-                <label for="numero">Número</label>
-                <input type="text" name="numero" id="numero" />
+                <label for="numero">Número*</label>
+                <input type="text" name="numero" id="numero" required/>
               </div>
             </div>
 
             <div class="form-group full-width">
               <div class="field">
-                <label for="complemento">Complemento</label>
-                <input type="text" name="complemento" id="complemento" />
+                <label for="complemento">Complemento*</label>
+                <input type="text" name="complemento" id="complemento" required/>
               </div>
             </div>
 
             <div class="form-group trio">
               <div class="field">
-                <label for="bairro">Bairro</label>
-                <input type="text" name="bairro" id="bairro" />
+                <label for="bairro">Bairro*</label>
+                <input type="text" name="bairro" id="bairro" required />
               </div>
               <div class="field">
-                <label for="municipio">Município</label>
-                <input type="text" name="municipio" id="municipio" />
+                <label for="municipio">Município*</label>
+                <input type="text" name="municipio" id="municipio" required/>
               </div>
               <div class="field">
-                <label for="estado">Estado</label>
-                <input type="text" name="estado" id="estado" />
+                <label for="estado">Estado*</label>
+                <input type="text" name="estado" id="estado" required />
               </div>
             </div>
 
             <div class="form-group trio">
               <div class="field">
-                <label for="contatoNome">Nome da Pessoa de Contato</label>
-                <input type="text" name="contatoNome" id="contatoNome" />
+                <label for="contatoNome">Nome da Pessoa de Contato*</label>
+                <input type="text" name="contatoNome" id="contatoNome" required/>
               </div>
               <div class="field">
-                <label for="telefone">Telefone</label>
-                <input type="tel" name="telefone" id="telefone" />
+                <label for="telefone">Telefone*</label>
+                <input type="tel" name="telefone" id="telefone" required />
               </div>
               <div class="field">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" />
+                <label for="email">Email*</label>
+                <input type="email" name="email" id="email" required/>
               </div>
             </div>
           </div>
@@ -117,33 +117,11 @@
         <!-- ==== ANEXOS ==== -->
         <section class="sct-anexos">
           <h2>ANEXOS</h2>
+         
 
-          <div class="wrp-doc-title">
-            <h4>Itens</h4>
-            <div class="wrp-btn-title">
-              <button>
-                <img src="/assets/trash-xmark-svgrepo-com.png" alt="lixeira" />
-              </button>
-              <button>
-                <img src="/assets/view-svgrepo-com.png" alt="lixeira" />
-              </button>
-              <p>Documento anexo 1</p>
-            </div>
-
-            <div class="wrp-btn-title">
-              <button>
-                <img src="/assets/trash-xmark-svgrepo-com.png" alt="lixeira" />
-              </button>
-              <button>
-                <img src="/assets/view-svgrepo-com.png" alt="lixeira" />
-              </button>
-              <p>Documento anexo 2</p>
-            </div>
-          </div>
-
-          <input type="file" name="anexo" id="anexo" />
-          <button class="mx-hgt-3">Incluir Anexo</button>
+          <input type="file" name="anexo" class="anexo" required />
         </section>
+        <button class="mx-hgt-3 btn-addAnexo">Incluir Anexo</button>
 
         <input type="submit" value="Salvar Fornecedor" />
       </form>

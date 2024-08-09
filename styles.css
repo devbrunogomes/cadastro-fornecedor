@@ -14,10 +14,18 @@
 button,
 input[type="submit"] {
   background-color: #019e0f;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+button {
+  margin-top: -1.5rem;
+}
+
+input[type="submit"] {
+  font-size: 1.5rem;
 }
 
 .container {
@@ -109,7 +117,6 @@ input {
 .sct-produtos {
   display: flex;
   flex-direction: column;
-  padding: 0.8rem;
   gap: 1rem;
 }
 
@@ -119,6 +126,7 @@ input {
   align-items: center;
   gap: 1rem;
   padding: 0 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .wrp-product button {
@@ -175,11 +183,6 @@ select {
   flex: 1 1 calc(10% - 2rem);
 }
 
-#btn-confirmarProduto {
-  background-color: white;
-  border: 1px solid black;
-  margin-bottom: 0.5rem;
-}
 
 #btnAddProduto {
   height: 3rem;
@@ -215,9 +218,11 @@ select {
   max-width: 4rem;
 }
 
-.sct-anexos .mx-hgt-3 {
+.mx-hgt-3 {
   height: 3rem;
 }
+
+
 
 /* === RESPONSIVIDADE === */
 

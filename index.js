@@ -1,4 +1,4 @@
-const formulario = document.getElementById("formulario");
+//====================== FORNECEDOR ================================
 
 //Variaveis dos elementos do fornecedor
 const iptRazaoSocial = document.querySelector("#razaoSocial");
@@ -21,7 +21,6 @@ const iptEmail = document.querySelector("#email");
 const sctProdutos = document.querySelector(".sct-produtos");
 const btnAddProduto = document.querySelector("#btnAddProduto");
 const produtosArray = [];
-//==== FORNECEDOR =====
 
 //Fetch data para o CEP
 iptCep.addEventListener("input", () => {
@@ -73,9 +72,7 @@ function validarDadosFornecedor() {
     { field: iptRazaoSocial, minLength: 10 },
     { field: iptCnpj, minLength: 10 },
     { field: iptNomeFantasia, minLength: 5 },
-    { field: iptInscricaoEstadual, minLength: 11 },
     { field: iptCep, minLength: 8 },
-    { field: iptInscricaoMunicipal, minLength: 11 },
     { field: iptEndereco, minLength: 5 },
     { field: iptNumero, minValue: 1 },
     { field: iptComplemento, minLength: 5 },
@@ -100,7 +97,7 @@ function validarDadosFornecedor() {
   }
 }
 
-//==== PRODUTOS =====
+//============================== PRODUTOS =================================
 //Calculo de valor total do produto
 function calcularValorTotal(card) {
   const iptValorTotal = card.querySelector("#valorTotal");
@@ -132,8 +129,8 @@ btnAddProduto.addEventListener("click", (event) => {
                 <div class="wrp-product-data">
                   <div class="form-group full-width">
                     <div class="field">
-                      <label for="produto">Produto</label>
-                      <input type="text" name="produto" id="produto" />
+                      <label for="produto">Produto*</label>
+                      <input type="text" name="produto" id="produto" required/>
                     </div>
                   </div>
 
@@ -148,19 +145,21 @@ btnAddProduto.addEventListener("click", (event) => {
                       </select>
                     </div>
                     <div class="field">
-                      <label for="qntdEstoque">QNTDE. em Estoque</label>
+                      <label for="qntdEstoque">QNTDE. em Estoque*</label>
                       <input
                         type="number"
                         name="qntdEstoque"
                         id="qntdEstoque"
+                        required
                       />
                     </div>
                     <div class="field">
-                      <label for="valorUnitario">Valor Unitário</label>
+                      <label for="valorUnitario">Valor Unitário*</label>
                       <input
                         type="number"
                         name="valorUnitario"
                         id="valorUnitario"
+                        required
                       />
                     </div>
                     <div class="field">
@@ -219,7 +218,6 @@ function validarProdutos() {
       iptValorUnitario.value.length != 0 ||
       iptValorTotal.value.length != 0
     ) {
-      console.log(`Caiu`);
       //se validado, inserir no array de produtos
       const produtoASerAdcionado = {
         id: Date.now(),
@@ -227,7 +225,7 @@ function validarProdutos() {
         unidadeMedida: iptUndMedida.value,
         qtdeEstoque: iptQntdEstoque.value,
         valorUnitario: iptValorUnitario.value,
-        valorTotal: iptValorTotal.value,
+        valorTotal: iptValorTotal.value.replace(/[^\d.-]/g, ""),
       };
 
       produtosArray.push(produtoASerAdcionado);
@@ -236,14 +234,54 @@ function validarProdutos() {
     }
   });
 }
+//================= ANEXO ====================
+const sctAnexo = document.querySelector(".sct-anexos");
+const btnAddAnexo = document.querySelector(".btn-addAnexo");
+let anexosArray = [];
 
-//==== FORMULÁRIO =====
+btnAddAnexo.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  //Criando novo elemento
+  const iptAnexo = document.createElement("input");
+  iptAnexo.type = "file";
+  iptAnexo.className = "anexo";
+  iptAnexo.name = "anexo";
+  sctAnexo.appendChild(iptAnexo);
+});
+
+function validarAnexos() {
+  const todosOsAnexos = document.querySelectorAll(".anexo");
+
+  todosOsAnexos.forEach((anexo) => {
+    const nomeArquivo = anexo.files[0].name;
+    if (nomeArquivo) {
+      const anexoASerAdicionado = {
+        id: Date.now(),
+        nomeArquivo: nomeArquivo,
+      };
+      anexosArray.push(anexoASerAdicionado);
+    }
+  });
+}
+
+//================= FORMULÁRIO ====================
+const formulario = document.getElementById("formulario");
+
 //Submit do formulário
 formulario.addEventListener("submit", (event) => {
   event.preventDefault();
 
   validarDadosFornecedor();
   validarProdutos();
+  validarAnexos();
+
+  //Saída para o caso de nao haver produto algum
+  if (produtosArray.length === 0) {
+    alert("Insira, ao menos um produto");
+    btnAddProduto.click();
+    return;
+  }
 
   //Para salvar os dados do fornecedor
   const jsonData = {
@@ -252,11 +290,23 @@ formulario.addEventListener("submit", (event) => {
     cnpj: iptCnpj.value,
     inscricaoEstadual: iptInscricaoEstadual.value,
     inscricaoMunicipal: iptInscricaoMunicipal.value,
+    cep: iptCep.value,
+    endereco: iptEndereco.value,
+    numero: iptNumero.value,
+    complemento: iptComplemento.value,
+    bairro: iptBairro.value,
+    municipio: iptMunicipio.value,
+    estado: iptEstado.value,
     nomeContato: iptContatoNome.value,
     telefoneContato: iptTelefone.value,
     emailContato: iptEmail.value,
     produtos: produtosArray,
+    anexos: anexosArray,
   };
 
   console.log(JSON.stringify(jsonData));
+
+  const preview = document.createElement("pre");
+  preview.textContent = JSON.stringify(jsonData, null, 2);
+  document.body.appendChild(preview);
 });
