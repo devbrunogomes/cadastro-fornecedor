@@ -1,5 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 
+/*========== ESTILIZACOES MAIS GENERALIZADAS  ==========  */
+
 :root {
   font-size: 62.5%;
 }
@@ -26,6 +28,29 @@ button {
 
 input[type="submit"] {
   font-size: 1.5rem;
+}
+
+button:hover {
+  filter: brightness(1.2);
+  transition: filter 0.3s;
+}
+
+input[type="submit"]:hover {
+  filter: brightness(1.2);
+      transition: filter 0.3s;
+}
+
+label {
+  font-weight: bold;
+}
+
+input {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .container {
@@ -59,7 +84,7 @@ h2 {
   max-width: 1300px;
   gap: 2rem;
 }
-/* === FORNECEDORES === */
+/* ==========  FORNECEDORES ========== */
 .fornecedor-dados {
   padding: 1rem;
 }
@@ -101,19 +126,9 @@ h2 {
   flex: 1 1 100%;
 }
 
-label {
-  font-weight: bold;
-}
 
-input {
-  padding: 1rem;
-  margin-bottom: 1rem;
-  font-size: 1em;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
 
-/* === PRODUTOS === */
+/* ==========  PRODUTOS ========== */
 .sct-produtos {
   display: flex;
   flex-direction: column;
@@ -188,7 +203,7 @@ select {
   height: 3rem;
 }
 
-/* === ANEXOS === */
+/* ========== ANEXOS ========== */
 
 .sct-anexos {
   display: flex;
@@ -221,10 +236,14 @@ select {
 .mx-hgt-3 {
   height: 3rem;
 }
+/* ========== PREVIEW ========== */
+.preview {
+  border: 1px solid rgb(0, 0, 0);
+  padding: 1.8rem;
+  font-size: 1.5rem;
+}
 
-
-
-/* === RESPONSIVIDADE === */
+/* ========== RESPONSIVIDADE ========== */
 
 @media (max-width: 1024px) {
   .container {

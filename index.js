@@ -1,3 +1,5 @@
+const container = document.querySelector(".container")
+
 //====================== FORNECEDOR ================================
 
 //Variaveis dos elementos do fornecedor
@@ -16,11 +18,6 @@ const iptEstado = document.querySelector("#estado");
 const iptContatoNome = document.querySelector("#contatoNome");
 const iptTelefone = document.querySelector("#telefone");
 const iptEmail = document.querySelector("#email");
-
-//Variaveis dos elementos do produto
-const sctProdutos = document.querySelector(".sct-produtos");
-const btnAddProduto = document.querySelector("#btnAddProduto");
-const produtosArray = [];
 
 //Fetch data para o CEP
 iptCep.addEventListener("input", () => {
@@ -92,12 +89,19 @@ function validarDadosFornecedor() {
     ) {
       alert("Dado Inválido");
       field.field.focus();
-      return;
+      return false;
     }
   }
+
+  return true;
 }
 
 //============================== PRODUTOS =================================
+//Variaveis dos elementos do produto
+const sctProdutos = document.querySelector(".sct-produtos");
+const btnAddProduto = document.querySelector("#btnAddProduto");
+const produtosArray = [];
+
 //Calculo de valor total do produto
 function calcularValorTotal(card) {
   const iptValorTotal = card.querySelector("#valorTotal");
@@ -160,6 +164,7 @@ btnAddProduto.addEventListener("click", (event) => {
                         name="valorUnitario"
                         id="valorUnitario"
                         required
+                        step="0.01" min="0"
                       />
                     </div>
                     <div class="field">
@@ -201,8 +206,10 @@ function removerElemento(elementToRemove) {
   elementToRemove.remove();
 }
 
+//Função para Validar Produtos
 function validarProdutos() {
   const todosOsProdutos = document.querySelectorAll(".wrp-product");
+  let indexProduto = 1
 
   todosOsProdutos.forEach((produto) => {
     // //Processo de Validação antes de montar o array
@@ -220,7 +227,7 @@ function validarProdutos() {
     ) {
       //se validado, inserir no array de produtos
       const produtoASerAdcionado = {
-        id: Date.now(),
+        id: indexProduto,
         descricaoProduto: iptProductName.value,
         unidadeMedida: iptUndMedida.value,
         qtdeEstoque: iptQntdEstoque.value,
@@ -229,12 +236,14 @@ function validarProdutos() {
       };
 
       produtosArray.push(produtoASerAdcionado);
+      indexProduto++;
     } else {
       alert("Produto(s) não validados");
     }
   });
 }
-//================= ANEXO ====================
+//================================= ANEXO =================================
+//Variaveis dos elementos de Anexo
 const sctAnexo = document.querySelector(".sct-anexos");
 const btnAddAnexo = document.querySelector(".btn-addAnexo");
 let anexosArray = [];
@@ -252,29 +261,37 @@ btnAddAnexo.addEventListener("click", (event) => {
 
 function validarAnexos() {
   const todosOsAnexos = document.querySelectorAll(".anexo");
+  let indexAnexo = 1
 
   todosOsAnexos.forEach((anexo) => {
     const nomeArquivo = anexo.files[0].name;
     if (nomeArquivo) {
       const anexoASerAdicionado = {
-        id: Date.now(),
+        id: indexAnexo,
         nomeArquivo: nomeArquivo,
       };
-      anexosArray.push(anexoASerAdicionado);
+      anexosArray.push(anexoASerAdicionado)
+      indexAnexo++;
     }
   });
 }
 
-//================= FORMULÁRIO ====================
+//================================= FORMULÁRIO =================================
 const formulario = document.getElementById("formulario");
 
 //Submit do formulário
 formulario.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  validarDadosFornecedor();
+ 
+
+  if (!validarDadosFornecedor()) {
+    return
+  }
+
   validarProdutos();
   validarAnexos();
+
 
   //Saída para o caso de nao haver produto algum
   if (produtosArray.length === 0) {
@@ -304,9 +321,10 @@ formulario.addEventListener("submit", (event) => {
     anexos: anexosArray,
   };
 
-  console.log(JSON.stringify(jsonData));
+  console.log(JSON.stringify(jsonData)); //Exibir no console
 
   const preview = document.createElement("pre");
+  preview.className = "preview";
   preview.textContent = JSON.stringify(jsonData, null, 2);
-  document.body.appendChild(preview);
+  container.appendChild(preview);
 });
