@@ -19,11 +19,8 @@ const iptEmail = document.querySelector("#email");
 
 //Variaveis dos elementos do produto
 const sctProdutos = document.querySelector(".sct-produtos");
-const iptProduto = document.querySelector("#produto");
-const iptUndMedida = document.querySelector("#undMedida");
-const iptQntdEstoque = document.querySelector("#qntdEstoque");
-const iptValorUnitario = document.querySelector("#valorUnitario");
-const iptValorTotal = document.querySelector("#valorTotal");
+
+let contadorDeProdutos = 1;
 const btnAddProduto = document.querySelector("#btnAddProduto");
 const btnRemoverProduto = document.querySelector(".btnRemoverProduto");
 const btnConfirmarProduto = document.querySelector("#btn-confirmarProduto");
@@ -110,23 +107,24 @@ function validarDadosFornecedor() {
 
 //==== PRODUTOS =====
 //Calculo de valor total do produto
-function calcularValorTotal() {
-  const qntdEstoque = parseInt(iptQntdEstoque.value) || 0;
-  const valorUnitario = parseFloat(iptValorUnitario.value) || 0;
+function calcularValorTotal(card) {
+  console.log(`caiu`);
+  const iptValorTotal = card.querySelector("#valorTotal");
+
+  const qntdEstoque = parseInt(card.querySelector("#qntdEstoque").value) || 0;
+  const valorUnitario =
+    parseFloat(card.querySelector("#valorUnitario").value) || 0;
   let valorTotal = qntdEstoque * valorUnitario || 0;
 
   iptValorTotal.disabled = false;
   iptValorTotal.value = `R$${valorTotal.toFixed(2)}`;
   iptValorTotal.disabled = true;
 }
-
-iptQntdEstoque.addEventListener("input", calcularValorTotal);
-iptValorUnitario.addEventListener("input", calcularValorTotal);
-
 //Adicionando novo Produto
 btnAddProduto.addEventListener("click", (event) => {
   event.preventDefault();
 
+  //Criando novo elemento node html para ser renderizado
   const cardProduto = document.createElement("div");
   cardProduto.className = "wrp-product";
   cardProduto.innerHTML = `<button class="btnRemoverProduto">
@@ -134,7 +132,7 @@ btnAddProduto.addEventListener("click", (event) => {
             </button>
 
             <div class="wrp-product-img-title">
-              <h3>Produto ${produtosArray.length + 2}</h3>
+              <h3>Produto ${contadorDeProdutos}</h3>
               <div class="wrp-product-data-img">
                 <img src="/assets/package-alt-svgrepo-com.png" alt="pacote" />
 
@@ -186,32 +184,45 @@ btnAddProduto.addEventListener("click", (event) => {
                 </div>
               </div>
             </div>`;
-
   sctProdutos.appendChild(cardProduto);
+
+  //Variaveis desse novo elemento
+  const iptQntdEstoque = cardProduto.querySelector("#qntdEstoque");
+  const iptValorUnitario = cardProduto.querySelector("#valorUnitario");
+
+  //Adicionando os listeners dos novos inputs
+  iptQntdEstoque.addEventListener("input", () => {
+    calcularValorTotal(cardProduto);
+  });
+  iptValorUnitario.addEventListener("input", () => {
+    calcularValorTotal(cardProduto);
+  });
+
+  contadorDeProdutos++;
 });
 
 //Confirmando Produto
-btnConfirmarProduto.addEventListener("click", (event) => {
-  event.preventDefault();
+// btnConfirmarProduto.addEventListener("click", (event) => {
+//   event.preventDefault();
 
-  if (
-    iptProduto.value.length > 3 &&
-    iptQntdEstoque.value.length != 0 &&
-    iptValorUnitario.value.length != 0 &&
-    iptValorTotal.value.length != 0
-  ) {
-    const produtoASerAdicionado = {
-      id: Date.now(),
-      produto: iptProduto.value,
-      undMedida: iptUndMedida.value,
-      qntdEstoque: parseInt(iptQntdEstoque.value),
-      valorUnitario: parseFloat(iptValorUnitario.value),
-      valorTotal: parseFloat(iptValorTotal.value),
-    };
-    produtosArray.push(produtoASerAdicionado);
-    console.log(produtosArray);
-  }
-});
+//   if (
+//     iptProduto.value.length > 3 &&
+//     iptQntdEstoque.value.length != 0 &&
+//     iptValorUnitario.value.length != 0 &&
+//     iptValorTotal.value.length != 0
+//   ) {
+//     const produtoASerAdicionado = {
+//       id: Date.now(),
+//       produto: iptProduto.value,
+//       undMedida: iptUndMedida.value,
+//       qntdEstoque: parseInt(iptQntdEstoque.value),
+//       valorUnitario: parseFloat(iptValorUnitario.value),
+//       valorTotal: parseFloat(iptValorTotal.value),
+//     };
+//     produtosArray.push(produtoASerAdicionado);
+//     console.log(produtosArray);
+//   }
+// });
 
 //==== FORMULÁRIO =====
 //Submit do formulário
