@@ -19,12 +19,7 @@ const iptEmail = document.querySelector("#email");
 
 //Variaveis dos elementos do produto
 const sctProdutos = document.querySelector(".sct-produtos");
-
-let contadorDeProdutos = 1;
 const btnAddProduto = document.querySelector("#btnAddProduto");
-const btnRemoverProduto = document.querySelector(".btnRemoverProduto");
-const btnConfirmarProduto = document.querySelector("#btn-confirmarProduto");
-
 const produtosArray = [];
 //==== FORNECEDOR =====
 
@@ -132,7 +127,6 @@ btnAddProduto.addEventListener("click", (event) => {
             </button>
 
             <div class="wrp-product-img-title">
-              <h3>Produto ${contadorDeProdutos}</h3>
               <div class="wrp-product-data-img">
                 <img src="/assets/package-alt-svgrepo-com.png" alt="pacote" />
 
@@ -177,8 +171,7 @@ btnAddProduto.addEventListener("click", (event) => {
                         name="valorTotal"
                         id="valorTotal"
                         disabled
-                      />
-                      <button id="btn-confirmarProduto" >Confirmar</button>
+                      />                      
                     </div>
                   </div>
                 </div>
@@ -189,6 +182,7 @@ btnAddProduto.addEventListener("click", (event) => {
   //Variaveis desse novo elemento
   const iptQntdEstoque = cardProduto.querySelector("#qntdEstoque");
   const iptValorUnitario = cardProduto.querySelector("#valorUnitario");
+  const btnRemoverProduto = cardProduto.querySelector(".btnRemoverProduto");
 
   //Adicionando os listeners dos novos inputs
   iptQntdEstoque.addEventListener("input", () => {
@@ -198,31 +192,16 @@ btnAddProduto.addEventListener("click", (event) => {
     calcularValorTotal(cardProduto);
   });
 
-  contadorDeProdutos++;
+  //Listener para o botão remove
+  btnRemoverProduto.addEventListener("click", () => {
+    removerElemento(cardProduto);
+  });
 });
 
-//Confirmando Produto
-// btnConfirmarProduto.addEventListener("click", (event) => {
-//   event.preventDefault();
-
-//   if (
-//     iptProduto.value.length > 3 &&
-//     iptQntdEstoque.value.length != 0 &&
-//     iptValorUnitario.value.length != 0 &&
-//     iptValorTotal.value.length != 0
-//   ) {
-//     const produtoASerAdicionado = {
-//       id: Date.now(),
-//       produto: iptProduto.value,
-//       undMedida: iptUndMedida.value,
-//       qntdEstoque: parseInt(iptQntdEstoque.value),
-//       valorUnitario: parseFloat(iptValorUnitario.value),
-//       valorTotal: parseFloat(iptValorTotal.value),
-//     };
-//     produtosArray.push(produtoASerAdicionado);
-//     console.log(produtosArray);
-//   }
-// });
+//Função para remover um produto
+function removerElemento(elementToRemove) {
+  elementToRemove.remove();
+}
 
 //==== FORMULÁRIO =====
 //Submit do formulário
