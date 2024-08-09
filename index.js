@@ -1,8 +1,6 @@
-// === PROCESSO DE VALIDAÇÃO DOS DADOS DO FORNECEDOR ===
-
 const formulario = document.getElementById("formulario");
 
-//Variaveis dos elementos
+//Variaveis dos elementos do fornecedor
 const iptRazaoSocial = document.querySelector("#razaoSocial");
 const iptCnpj = document.querySelector("#cnpj");
 const iptNomeFantasia = document.querySelector("#nomeFantasia");
@@ -18,6 +16,16 @@ const iptEstado = document.querySelector("#estado");
 const iptContatoNome = document.querySelector("#contatoNome");
 const iptTelefone = document.querySelector("#telefone");
 const iptEmail = document.querySelector("#email");
+
+//Variaveis dos elementos do produto
+const iptProduto = document.querySelector("#produto");
+const iptUndMedida = document.querySelector("#undMedida");
+const iptQntdEstoque = document.querySelector("#qntdEstoque");
+const iptValorUnitario = document.querySelector("#valorUnitario");
+const iptValorTotal = document.querySelector("#valorTotal");
+const cardProduto = document.querySelector("#cardProduto");
+const produtosArray = []
+//==== FORNECEDOR =====
 
 //Fetch data para o CEP
 iptCep.addEventListener("input", () => {
@@ -63,7 +71,7 @@ iptCep.addEventListener("input", () => {
   }
 });
 
-//Enviando o formulario e validando dados
+//Validando dados do Fornecedor
 function validarDadosFornecedor() {
   const fields = [
     { field: iptRazaoSocial, minLength: 10 },
@@ -96,6 +104,26 @@ function validarDadosFornecedor() {
   }
 }
 
+//==== PRODUTOS =====
+//Calculo de valor total do produto
+function calcularValorTotal() {
+  const qntdEstoque = parseInt(iptQntdEstoque.value) || 0;
+  const valorUnitario = parseFloat(iptValorUnitario.value) || 0;
+  let valorTotal = qntdEstoque * valorUnitario || 0;
+
+  iptValorTotal.disabled = false;
+  iptValorTotal.value = `R$${valorTotal.toFixed(2)}`;
+  iptValorTotal.disabled = true;
+}
+
+iptQntdEstoque.addEventListener("input", calcularValorTotal);
+iptValorUnitario.addEventListener("input", calcularValorTotal);
+
+//Adicionando novo Produto
+
+
+//==== FORMULÁRIO =====
+//Submit do formulário
 formulario.addEventListener("submit", (event) => {
   event.preventDefault();
 
