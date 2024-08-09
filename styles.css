@@ -8,7 +8,12 @@
   box-sizing: border-box;
 }
 
-button {
+button,
+input[type="submit"] {
+  background-color: #019e0f;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
 }
 
@@ -21,6 +26,22 @@ button {
   padding: 2rem;
 }
 
+section {
+  border: 0.01rem solid black;
+  border-radius: 3px;
+}
+
+h2 {
+  background-color: #0085b2;
+  color: white;
+  padding: 0.5rem;
+}
+
+.spc-btw {
+  display: flex;
+  justify-content: space-between;
+}
+
 .formulario {
   display: flex;
   flex-direction: column;
@@ -28,20 +49,37 @@ button {
   gap: 2rem;
 }
 /* === FORNECEDORES === */
+.fornecedor-dados {
+  padding: 1rem;
+}
+
 .form-group {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
 }
 
+.sct-fornecedor .form-group:first-of-type {
+  margin-top: 0.8rem;
+}
+
 .form-group .field {
-  flex: 1 1 calc(50% - 2rem);
+  flex: 1 1 calc(30% - 2rem);
   display: flex;
   flex-direction: column;
 }
 
-#cep{
-  max-width: 20rem;
+#cep,
+#inscricaoEstadual,
+#inscricaoMunicipal,
+.mx-wdt {
+  width: 30rem;
+}
+
+#razaoSocial,
+#nomeFantasia,
+#endereco {
+  width: 50rem;
 }
 
 .form-group.trio .field {
@@ -66,7 +104,6 @@ input {
 
 /* === PRODUTOS === */
 .sct-produtos {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -74,7 +111,7 @@ input {
 
 .wrp-product {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   gap: 1rem;
   padding: 0 1rem;
@@ -91,12 +128,13 @@ input {
 }
 
 .wrp-product-img-title {
-  border: 1px solid red;
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  padding: 2rem;
+  justify-content: center;
   gap: 2rem;
+  padding: 0 0.8rem;
 }
 
 .wrp-product-data-img {
@@ -128,12 +166,50 @@ select {
   flex: 1 1 calc(10% - 2rem);
 }
 
+.sct-produtos button {
+  height: 3rem;
+}
+
+/* === ANEXOS === */
+
+.sct-anexos {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.wrp-doc-title {
+  border: 1px solid red;
+  padding: 1rem;
+}
+
+.wrp-btn-title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.wrp-btn-title button {
+  background: none;
+  border: none;
+}
+
+.wrp-btn-title button img {
+  max-width: 4rem;
+}
+
+.sct-anexos .mx-hgt-3 {
+  height: 3rem;
+}
+
 /* === RESPONSIVIDADE === */
 
 @media (max-width: 1024px) {
   .form-group .field,
   .form-group.trio .field,
-  .form-group.full-width .field {
+  .form-group.full-width .field,
+  .form-group .mx-wdt {
     flex: 1 1 100%;
   }
 }
