@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+
 :root {
   font-size: 62.5%;
 }
@@ -6,6 +8,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: "Mulish", sans-serif;
 }
 
 button,
@@ -137,6 +140,14 @@ input {
   padding: 0 0.8rem;
 }
 
+.wrp-product-img-title h3 {
+  background: #ffffff;
+  padding: 0 1rem;
+	display: inline;
+	position: absolute;
+  transform: translate(10px, -55px);
+}
+
 .wrp-product-data-img {
   display: flex;
   flex-direction: row;
@@ -179,8 +190,18 @@ select {
 }
 
 .wrp-doc-title {
-  border: 1px solid red;
+  border: 1px solid rgb(0, 0, 0);
+  margin: 0 2rem;
   padding: 1rem;
+}
+
+.wrp-doc-title h4 {
+	background: #ffffff;
+  padding: 0 1rem;
+	display: inline;
+	position: absolute;
+  transform: translate(10px, -16px);
+
 }
 
 .wrp-btn-title {
