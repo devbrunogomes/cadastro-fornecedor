@@ -103,7 +103,6 @@ function validarDadosFornecedor() {
 //==== PRODUTOS =====
 //Calculo de valor total do produto
 function calcularValorTotal(card) {
-  console.log(`caiu`);
   const iptValorTotal = card.querySelector("#valorTotal");
 
   const qntdEstoque = parseInt(card.querySelector("#qntdEstoque").value) || 0;
@@ -203,10 +202,61 @@ function removerElemento(elementToRemove) {
   elementToRemove.remove();
 }
 
+function validarProdutos() {
+  const todosOsProdutos = document.querySelectorAll(".wrp-product");
+
+  todosOsProdutos.forEach((produto) => {
+    // //Processo de Validação antes de montar o array
+    const iptProductName = produto.querySelector("#produto");
+    const iptUndMedida = produto.querySelector("#undMedida");
+    const iptQntdEstoque = produto.querySelector("#qntdEstoque");
+    const iptValorUnitario = produto.querySelector("#valorUnitario");
+    const iptValorTotal = produto.querySelector("#valorTotal");
+
+    if (
+      iptProductName.value.length > 3 ||
+      iptQntdEstoque.value.length != 0 ||
+      iptValorUnitario.value.length != 0 ||
+      iptValorTotal.value.length != 0
+    ) {
+      console.log(`Caiu`);
+      //se validado, inserir no array de produtos
+      const produtoASerAdcionado = {
+        id: Date.now(),
+        descricaoProduto: iptProductName.value,
+        unidadeMedida: iptUndMedida.value,
+        qtdeEstoque: iptQntdEstoque.value,
+        valorUnitario: iptValorUnitario.value,
+        valorTotal: iptValorTotal.value,
+      };
+
+      produtosArray.push(produtoASerAdcionado);
+    } else {
+      alert("Produto(s) não validados");
+    }
+  });
+}
+
 //==== FORMULÁRIO =====
 //Submit do formulário
 formulario.addEventListener("submit", (event) => {
   event.preventDefault();
 
   validarDadosFornecedor();
+  validarProdutos();
+
+  //Para salvar os dados do fornecedor
+  const jsonData = {
+    razaoSocial: iptRazaoSocial.value,
+    nomeFantasia: iptNomeFantasia.value,
+    cnpj: iptCnpj.value,
+    inscricaoEstadual: iptInscricaoEstadual.value,
+    inscricaoMunicipal: iptInscricaoMunicipal.value,
+    nomeContato: iptContatoNome.value,
+    telefoneContato: iptTelefone.value,
+    emailContato: iptEmail.value,
+    produtos: produtosArray,
+  };
+
+  console.log(JSON.stringify(jsonData));
 });
