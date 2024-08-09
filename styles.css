@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 :root {
   font-size: 62.5%;
@@ -143,8 +143,8 @@ input {
 .wrp-product-img-title h3 {
   background: #ffffff;
   padding: 0 1rem;
-	display: inline;
-	position: absolute;
+  display: inline;
+  position: absolute;
   transform: translate(10px, -55px);
 }
 
@@ -196,12 +196,11 @@ select {
 }
 
 .wrp-doc-title h4 {
-	background: #ffffff;
+  background: #ffffff;
   padding: 0 1rem;
-	display: inline;
-	position: absolute;
+  display: inline;
+  position: absolute;
   transform: translate(10px, -16px);
-
 }
 
 .wrp-btn-title {
@@ -227,10 +226,43 @@ select {
 /* === RESPONSIVIDADE === */
 
 @media (max-width: 1024px) {
+  .container {
+    
+    padding: 0.5rem;
+  }
+
   .form-group .field,
   .form-group.trio .field,
+  .form-group.quatro .field,
   .form-group.full-width .field,
   .form-group .mx-wdt {
     flex: 1 1 100%;
+    flex-direction: column;
   }
+
+  #cep,
+  #inscricaoEstadual,
+  #inscricaoMunicipal,
+  .mx-wdt {
+    width: 100%;
+  }
+
+  #razaoSocial,
+  #nomeFantasia,
+  #endereco {
+    width: 100%;
+  }
+  .wrp-product-data-img {
+    justify-content: center;
+  }
+
+  .wrp-product-img-title h3 {
+    background: #ffffff;
+    padding: 0 1rem;
+    display: inline;
+    position: relative;
+    transform: translate(0, -8px);
+  }
+
+  
 }
